@@ -1,0 +1,2 @@
+# imap-cleaner
+needs gofmt
